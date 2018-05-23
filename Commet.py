@@ -319,20 +319,54 @@ def output_matrices (readSetMatrix, bvreadSetMatrix, readSetNames, output_direct
     
     # Plot the dendrogram for the normalized matrix
     ########################################################
-    command="Rscript --vanilla dendro.R "+output_directory+"matrix_normalized.csv "+output_directory+"dendrogram_normalized.png"
+    dendro = os.path.join(bin_dir, "dendro.R")
+    command=" ".join([
+        "Rscript", "--vanilla",
+        dendro,
+        os.path.join(output_directory, "matrix_normalized.csv"),
+        os.path.join(output_directory, "dendrogram_normalized.png")
+    ])
     os.system(command)
     
     
     # Plot the heatmap matrices
     # Plain Matrix
-    command="Rscript --vanilla heatmap.r "+output_directory+"matrix_plain.csv " +output_directory+"matrix_normalized.csv "+ output_directory+"heatmap_plain.png Plain"
+    heatmap = os.path.join(bin_dir, "heatmap.r")
+    command=" ".join([
+        "Rscript", 
+        "--vanilla",
+        heatmap,
+        os.path.join(output_directory, "matrix_plain.csv"),
+        os.path.join(output_directory, "matrix_normalized.csv"),
+        os.path.join(output_directory, "heatmap_plain.png"),
+        "Plain"
+    ])
     os.system(command)
+
     # Percentage Matrix
-    command="Rscript --vanilla heatmap.r "+output_directory+"matrix_percentage.csv " +output_directory+"matrix_normalized.csv "+ output_directory+"heatmap_percentage.png Percentage"
+    #command="Rscript --vanilla heatmap.r "+output_directory+"matrix_percentage.csv " +output_directory+"matrix_normalized.csv "+ output_directory+"heatmap_percentage.png Percentage"
+    command=" ".join([
+        "Rscript", 
+        "--vanilla",
+        heatmap,
+        os.path.join(output_directory, "matrix_percentage.csv"),
+        os.path.join(output_directory, "matrix_normalized.csv"),
+        os.path.join(output_directory, "heatmap_percentage.png"),
+        "Percentage"
+    ])
     os.system(command)
+
     # Normalized Matrix
-    command="Rscript --vanilla heatmap.r "+output_directory+"matrix_normalized.csv " +output_directory+"matrix_normalized.csv "+ output_directory+"heatmap_normalized.png Normalized"
-    print (command)
+    #command="Rscript --vanilla heatmap.r "+output_directory+"matrix_normalized.csv " +output_directory+"matrix_normalized.csv "+ output_directory+"heatmap_normalized.png Normalized"
+    command=" ".join([
+        "Rscript", 
+        "--vanilla",
+        heatmap,
+        os.path.join(output_directory, "matrix_normalized.csv"),
+        os.path.join(output_directory, "matrix_normalized.csv"),
+        os.path.join(output_directory, "heatmap_normalized.png"),
+        "Normalized"
+    ])
     os.system(command)
     
     print ("All Commet work is done")
